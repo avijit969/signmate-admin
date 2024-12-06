@@ -35,7 +35,7 @@ export default function TextToSignQuestion({ handelBack }) {
         try {
             const response = await axios({
                 method: 'post',
-                url: `${import.meta.env.VITE_API_URL}/questions/write_sign`,
+                url: `${import.meta.env.VITE_API_URL}/questions/sign_to_text`,
                 data: payload,
                 headers: {
                     'Content-Type': 'application/json',

@@ -1,5 +1,4 @@
 import React from 'react'
-import preview_video from '../assets/preview.mp4';
 import { FaEye } from 'react-icons/fa';
 
 export default function PreviewQuestion({ question, handelCreateQuestionBtn }) {
@@ -18,7 +17,7 @@ export default function PreviewQuestion({ question, handelCreateQuestionBtn }) {
                     Create: {question.title}
                 </h1>
                 <video
-                    src={preview_video}
+                    src={'https://res.cloudinary.com/dr67ekdtl/video/upload/v1733509357/qeb35dvb8kaabipocsts.mp4'}
                     controls={false}
                     loop={true}
                     autoPlay={true}
