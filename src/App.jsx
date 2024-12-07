@@ -6,10 +6,9 @@ import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
 import PrivateRoute from "./components/PrivateRout"
 import Layout from "./Layout"
-import Photos from "./pages/Photos"
-import { Library } from "lucide-react"
 import SideBarWrapper from "./components/SideBarWrapper"
 import Create_question from "./pages/Create_question"
+import UploadSign from "./pages/UploadSign"
 
 
 // define all routes here
@@ -25,8 +24,8 @@ const router = createBrowserRouter([
         element: <PrivateRoute><Home /></PrivateRoute>
       },
       {
-        path: 'photos',
-        element: <Photos />
+        path: 'upload-sign',
+        element: <UploadSign />
       },
       {
         path: '/create-question/:questionType',

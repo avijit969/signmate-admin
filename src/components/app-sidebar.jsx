@@ -30,7 +30,7 @@ const items = [
     },
     {
         title: "Upload Sign",
-        url: "/photos",
+        url: "/upload-sign",
         icon: UploadCloudIcon,
 
     },
@@ -81,23 +81,23 @@ const items = [
 export function AppSidebar() {
     return (
         <Sidebar >
-            <SidebarHeader>
+            <SidebarHeader className="bg-slate-400 dark:bg-black">
                 <img
                     className='cursor-pointer rounded-xl '
                     src={snapstore}
                     height={10} width={150}
                 />
             </SidebarHeader>
-            <SidebarContent >
+            <SidebarContent className="bg-slate-400 dark:bg-black">
                 <SidebarGroup>
                     <SidebarGroupContent>
-                        <SidebarMenu className="text-black ">
+                        <SidebarMenu className="text-black dark:text-white ">
                             <Collapsible defaultOpen={false} className="group/collapsible">
                                 {items.map((item) => (
                                     <SidebarMenuItem>
-                                        <SidebarMenuButton className=" flex justify-between" >
+                                        <SidebarMenuButton className="flex justify-between" >
                                             <Link to={item.url}>
-                                                <div className="flex items-center">
+                                                <div className="flex items-center text-black dark:text-white  ">
                                                     <item.icon className="mr-2 h-4 w-4" />
                                                     {item.title}
                                                 </div>
@@ -106,11 +106,11 @@ export function AppSidebar() {
                                                 <IoIosArrowForward />
                                             </CollapsibleTrigger>}
                                         </SidebarMenuButton>
-                                        <CollapsibleContent>
+                                        <CollapsibleContent >
                                             <SidebarMenuSub>
-                                                <SidebarMenuSubItem>
+                                                <SidebarMenuSubItem isOpen>
                                                     {item.sumContentItems?.map((subItem) => (
-                                                        <Link to={`${subItem.url}/${subItem.title}`} className="flex items-center mt-2 bg-gray-50 px-4 py-2 hover:bg-gray-100 rounded-lg ">
+                                                        <Link to={`${subItem.url}/${subItem.title}`} className="flex items-center mt-2 bg-gray-50 px-4 py-2 hover:bg-gray-100 rounded-lg text-black dark:text-white dark:bg-black dark:hover:bg-gray-800">
                                                             <p>{subItem.title}</p>
                                                         </Link>
                                                     ))}

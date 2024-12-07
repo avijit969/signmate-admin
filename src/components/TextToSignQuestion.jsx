@@ -6,6 +6,9 @@ import axios from 'axios';
 import { useToast } from '@/hooks/use-toast';
 import Lottie from 'lottie-react';
 import loader from '../assets/lottie/loading.json';
+import { questionLevels } from '../../utils/constant';
+import { topics } from '../../utils/constant';
+import { Select, SelectTrigger, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectValue } from './ui/select';
 export default function TextToSignQuestion({ handelBack }) {
     const [question, setQuestion] = useState('');
     const [correctSignText, setCorrectSignText] = useState('');
@@ -24,10 +27,10 @@ export default function TextToSignQuestion({ handelBack }) {
         }
 
         const payload = {
-            level,
+            level: level.toLowerCase(),
             question,
             sign_text: correctSignText,
-            topic,
+            topic: topic.toLowerCase(),
         };
 
         setIsLoading(true);
@@ -73,7 +76,7 @@ export default function TextToSignQuestion({ handelBack }) {
     return (
         <div className="flex flex-col gap-4">
             {isLoading ? (
-                <Lottie animationData={loader} loop={true} className='w-full h-full' />
+                <Lottie animationData={loader} loop={true} className='w-[1/2] h-[1/2]' />
             ) : (
                 <>
                     {/* Question Input */}
@@ -93,22 +96,37 @@ export default function TextToSignQuestion({ handelBack }) {
                     />
 
                     {/* Level Input */}
-                    <Label htmlFor="level">Level</Label>
-                    <Input
-                        id="level"
-                        placeholder="Enter Level (e.g., intermediate)"
-                        value={level}
-                        onChange={(e) => setLevel(e.target.value)}
-                    />
+                    <Label htmlFor="level">Select Level</Label>
+                    <Select onValueChange={setLevel}>
+                        <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select Level" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                                {questionLevels.map((level) => (
+                                    <SelectItem key={level} value={level}>
+                                        {level}
+                                    </SelectItem>
+                                ))}
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
 
-                    {/* Topic Input */}
-                    <Label htmlFor="topic">Topic</Label>
-                    <Input
-                        id="topic"
-                        placeholder="Enter Topic (e.g., alphabet)"
-                        value={topic}
-                        onChange={(e) => setTopic(e.target.value)}
-                    />
+                    <Label htmlFor="level">Select Question Topic</Label>
+                    <Select onValueChange={setTopic}>
+                        <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select Topic" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                                {topics.map((topic) => (
+                                    <SelectItem key={topic} value={topic}>
+                                        {topic}
+                                    </SelectItem>
+                                ))}
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
 
                     {/* Action Buttons */}
                     <div className="flex items-center justify-end">

@@ -15,11 +15,14 @@ import Lottie from 'lottie-react';
 import loader from '../assets/lottie/loading.json';
 import { useToast } from '@/hooks/use-toast';
 import axios from 'axios';
-
+import { questionLevels } from '../../utils/constant';
+import { topics } from '../../utils/constant';
 export default function YesNoQuestion({ handelBack }) {
     const [question, setQuestion] = useState('');
     const [signVideo, setSignVideo] = useState(null);
     const [correctOption, setCorrectOption] = useState('');
+    const [topic, setTopic] = useState('');
+    const [level, setLevel] = useState('')
     const [isLoading, setIsLoading] = useState(false);
     const { toast } = useToast();
 
@@ -35,8 +38,9 @@ export default function YesNoQuestion({ handelBack }) {
         const formData = new FormData();
         formData.append('question', question);
         formData.append('sign_video', signVideo);
-        formData.append('correct_option', correctOption);
-
+        formData.append('is_same', correctOption === 'yes' ? true : false);
+        formData.append('topic', topic.toLowerCase());
+        formData.append("level", level.toLowerCase());
         setIsLoading(true);
 
         try {
@@ -60,6 +64,8 @@ export default function YesNoQuestion({ handelBack }) {
                 setQuestion('');
                 setSignVideo(null);
                 setCorrectOption('');
+                setTopic('');
+                setLevel('');
             } else {
                 toast({
                     title: 'Error',
@@ -82,25 +88,58 @@ export default function YesNoQuestion({ handelBack }) {
                 <Lottie animationData={loader} loop={true} className="w-full h-full" />
             ) : (
                 <>
-                    {/* Question Input */}
-                    <Textarea
-                        placeholder="Enter Your Question"
-                        value={question}
-                        onChange={(e) => setQuestion(e.target.value)}
-                    />
+                    <dvi className="w-full">
+                        {/* Question Input */}
+                        <Textarea
+                            placeholder="Enter Your Question"
+                            value={question}
+                            onChange={(e) => setQuestion(e.target.value)}
+                        />
 
-                    {/* Sign Video Upload */}
-                    <Label htmlFor="sign_video">Upload Sign Video</Label>
-                    <Input
-                        id="sign_video"
-                        type="file"
-                        accept="video/*"
-                        onChange={(e) => setSignVideo(e.target.files[0])}
-                    />
-
-                    {/* Correct Option Selection */}
-                    <Label>Select Correct Option</Label>
-                    <div>
+                        {/* Sign Video Upload */}
+                        <Label htmlFor="sign_video">Upload Sign Video</Label>
+                        <Input
+                            id="sign_video"
+                            type="file"
+                            accept="video/*"
+                            onChange={(e) => setSignVideo(e.target.files[0])}
+                        />
+                        {/* select topic  */}
+                        <Label htmlFor="topic">Select Topic</Label>
+                        <Select onValueChange={setTopic}>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select a topic" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    <SelectLabel>Topics</SelectLabel>
+                                    {topics.map((topic) => (
+                                        <SelectItem key={topic} value={topic}>
+                                            {topic}
+                                        </SelectItem>
+                                    ))}
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                        {/* question level */}
+                        <Label>Select question Level</Label>
+                        <Select onValueChange={setLevel}>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select a level" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    <SelectLabel>Levels</SelectLabel>
+                                    {questionLevels.map((level) => (
+                                        <SelectItem key={level} value={level}>
+                                            {level}
+                                        </SelectItem>
+                                    ))}
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                        {/* Correct Option Selection */}
+                        <Label>Select Correct Option</Label>
                         <Select onValueChange={setCorrectOption}>
                             <SelectTrigger>
                                 <SelectValue placeholder="Select an option" />
@@ -113,8 +152,8 @@ export default function YesNoQuestion({ handelBack }) {
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
-                    </div>
 
+                    </dvi>
                     {/* Action Buttons */}
                     <div className="flex items-center justify-end">
                         <button

@@ -6,7 +6,9 @@ import axios from 'axios';
 import Lottie from 'lottie-react';
 import loader from '../assets/lottie/loading.json';
 import { useToast } from '@/hooks/use-toast';
-
+import { questionLevels } from '../../utils/constant';
+import { topics } from '../../utils/constant';
+import { Select, SelectTrigger, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectValue } from './ui/select';
 export default function MatchingQuestion({ handelBack }) {
     const [question, setQuestion] = useState('');
     const [level, setLevel] = useState('');
@@ -42,8 +44,8 @@ export default function MatchingQuestion({ handelBack }) {
 
         const formData = new FormData();
         formData.append('question', question);
-        formData.append('level', level);
-        formData.append('topic', topic);
+        formData.append('level', level.toLowerCase());
+        formData.append('topic', topic.toLowerCase());
 
         column1.forEach((item, index) => {
             formData.append(`sign_text_${index + 1}`, item.text || '');
@@ -116,20 +118,37 @@ export default function MatchingQuestion({ handelBack }) {
                         value={question}
                         onChange={(e) => setQuestion(e.target.value)}
                     />
-                    <Label htmlFor="level">Level</Label>
-                    <Input
-                        id="level"
-                        placeholder="Enter Level"
-                        value={level}
-                        onChange={(e) => setLevel(e.target.value)}
-                    />
-                    <Label htmlFor="topic">Topic</Label>
-                    <Input
-                        id="topic"
-                        placeholder="Enter Topic"
-                        value={topic}
-                        onChange={(e) => setTopic(e.target.value)}
-                    />
+                    <Label htmlFor="level">Select Level</Label>
+                    <Select onValueChange={setLevel}>
+                        <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select Level" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                                {questionLevels.map((level) => (
+                                    <SelectItem key={level} value={level}>
+                                        {level}
+                                    </SelectItem>
+                                ))}
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
+
+                    <Label htmlFor="level">Select Question Topic</Label>
+                    <Select onValueChange={setTopic}>
+                        <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select Topic" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                                {topics.map((topic) => (
+                                    <SelectItem key={topic} value={topic}>
+                                        {topic}
+                                    </SelectItem>
+                                ))}
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
 
                     <Label>Column 1 (Sign Text)</Label>
                     <div className="flex flex-col gap-2 border-2 border-slate-400 p-2 rounded-lg">
