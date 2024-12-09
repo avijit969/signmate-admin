@@ -63,7 +63,6 @@ export default function TextToSignQuestion({ handelBack }) {
                 });
             }
         } catch (error) {
-            console.error('Error submitting the question:', error);
             toast({
                 title: 'Error',
                 description: 'Failed to submit the question. Please try again.',

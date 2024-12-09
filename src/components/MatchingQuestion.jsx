@@ -97,7 +97,6 @@ export default function MatchingQuestion({ handelBack }) {
                 });
             }
         } catch (error) {
-            console.error('Error submitting the data:', error);
             toast({
                 title: 'Error',
                 description: 'Failed to submit the question. Please try again.',

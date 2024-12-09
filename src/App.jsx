@@ -9,6 +9,9 @@ import Layout from "./Layout"
 import SideBarWrapper from "./components/SideBarWrapper"
 import Create_question from "./pages/Create_question"
 import UploadSign from "./pages/UploadSign"
+import Create_practice_set from "./pages/Create_practice_set"
+import Add_practice_set_questions from "./pages/Add_practice_set_questions"
+import { Toaster } from "react-hot-toast"
 
 
 // define all routes here
@@ -30,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: '/create-question/:questionType',
         element: <Create_question />
+      },
+      {
+        path: '/create-practice-set',
+        element: <Create_practice_set />
+      },
+      {
+        path: '/add_practice_set_questions',
+        element: <Add_practice_set_questions />
       }
     ],
     errorElement: <ErrorPage />
@@ -46,6 +57,10 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
+      <Toaster
+        position="bottom-right"
+        reverseOrder={false}
+      />
       <RouterProvider router={router} fallbackElement={<Loader />} />
     </>
   )

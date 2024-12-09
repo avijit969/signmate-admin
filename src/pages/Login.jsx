@@ -15,7 +15,8 @@ function Login() {
     const dispatch = useDispatch();
     const { toast } = useToast();
     const navigate = useNavigate()
-    const handelLogin = async () => {
+    const handelLogin = async (e) => {
+        e.preventDefault();
         setLoading(true);
         if (username != "admin") {
             toast({
@@ -27,7 +28,6 @@ function Login() {
         }
         const response = await login(username, password);
         if (response.success && response.data.user.isAdmin) {
-            console.log(response.data);
             dispatch(AuthLogin({ userData: response.data.user }));
             toast({
                 variant: "success",
@@ -35,7 +35,6 @@ function Login() {
             });
             navigate('/')
         } else {
-            console.log(response.message);
             toast({
                 variant: "destructive",
                 title: response.message,
@@ -45,7 +44,7 @@ function Login() {
     };
     return (
         <div className="h-screen flex justify-center items-center">
-            <div className="flex flex-col gap-4 w-1/3 border-2 p-10 rounded-2xl">
+            <form onSubmit={handelLogin} className="flex flex-col gap-4 w-1/3 border-2 p-10 rounded-2xl">
                 <h1 className="text-2xl text-center text-slate-600 font-bold">
                     Login To SignMate Admin
                 </h1>
@@ -61,11 +60,10 @@ function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <Button variant="secondary" onClick={() => handelLogin()}>
+                <Button variant="secondary" type="submit" >
                     {loading ? <Loader height={4} width={4} /> : "Login"}
                 </Button>
-
-            </div>
+            </form>
         </div>
     );
 }

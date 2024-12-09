@@ -18,7 +18,6 @@ import {
 import { Link } from "react-router-dom"
 import { DashboardIcon } from "@radix-ui/react-icons";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./ui/collapsible";
-import { SubContent } from "@radix-ui/react-dropdown-menu";
 import snapstore from '../assets/light_logo.png'
 
 // Menu items.
@@ -68,7 +67,7 @@ const items = [
     },
     {
         title: "Create Practice Set",
-        url: "#",
+        url: "/create-practice-set",
         icon: Search,
     },
     {
