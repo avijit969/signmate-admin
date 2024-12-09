@@ -30,20 +30,21 @@ function UploadSign() {
         const formData = new FormData();
         formData.append('sign_video', signVideo);
         formData.append('sign_image', signImage);
-        formData.append('sign_text', signText);
+        formData.append('sign_name', signText);
         formData.append('category', category);
 
         setLoading(true);
 
         try {
-            const response = await axios.post(
-                `${import.meta.env.VITE_API_URL}/learning/learning`,
-                formData,
-                {
-                    headers: { 'Content-Type': 'multipart/form-data' },
-                    withCredentials: true,
-                }
-            );
+            const response = await axios({
+                method: 'post',
+                url: `${import.meta.env.VITE_API_URL}/learning/learning`,
+                data: formData,
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+                withCredentials: true,
+            })
 
             if (response.data.success) {
                 toast({
