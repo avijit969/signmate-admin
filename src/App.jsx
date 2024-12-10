@@ -18,13 +18,14 @@ import { Toaster } from "react-hot-toast"
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <SideBarWrapper>
+    element: <PrivateRoute><SideBarWrapper>
       <Layout />
-    </SideBarWrapper>,
+    </SideBarWrapper>
+    </PrivateRoute>,
     children: [
       {
         path: '',
-        element: <PrivateRoute><Home /></PrivateRoute>
+        element: <Home />
       },
       {
         path: 'upload-sign',
