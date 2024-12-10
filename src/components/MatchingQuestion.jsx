@@ -63,7 +63,7 @@ export default function MatchingQuestion({ handelBack }) {
         try {
             const response = await axios({
                 method: 'post',
-                url: `${import.meta.env.VITE_API_URL}/questions/match_signs`,
+                url: `${import.meta.env.VITE_API_URL}/questions/match_sign`,
                 data: formData,
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -101,6 +101,7 @@ export default function MatchingQuestion({ handelBack }) {
                 title: 'Error',
                 description: 'Failed to submit the question. Please try again.',
             });
+            console.error(error);
         } finally {
             setIsLoading(false);
         }
