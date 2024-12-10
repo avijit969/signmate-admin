@@ -59,6 +59,7 @@ const AddQuestionsPage = () => {
                     'Content-Type': 'application/json',
                 },
                 withCredentials: true,
+                credentials: 'include',
             })
             if (response.data.success) {
                 toast({

@@ -24,6 +24,7 @@ export default function MultipleChoiceQuestion({ totalQuestion }) {
                 method: 'get',
                 url: `${import.meta.env.VITE_API_URL}/questions/choose_correct_sign?page=${currentPage}&limit=2`,
                 withCredentials: true,
+                credentials: 'include',
             });
             const { docs, totalPages } = response.data.data;
             setQuestions(docs);

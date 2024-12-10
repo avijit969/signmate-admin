@@ -24,6 +24,7 @@ export default function MatchingQuestion({ totalQuestion }) {
                 method: 'get',
                 url: `${import.meta.env.VITE_API_URL}/questions/match_sign?page=${currentPage}&limit=5`,
                 withCredentials: true,
+                credentials: 'include',
             });
             const { docs, totalPages } = response.data.data;
             setQuestions(docs);

@@ -24,6 +24,7 @@ export default function TextToSignQuestion({ totalQuestion }) {
                 method: 'get',
                 url: `${import.meta.env.VITE_API_URL}/questions/sign_to_text?page=${currentPage}&limit=3`,
                 withCredentials: true,
+                credentials: 'include',
             });
             const { docs, totalPages } = response.data.data;
             setQuestions(docs);

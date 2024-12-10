@@ -24,6 +24,7 @@ export default function YesNoQuestion({ totalQuestion }) {
                 method: 'get',
                 url: `${import.meta.env.VITE_API_URL}/questions/yes_no?page=${currentPage}&limit=5`,
                 withCredentials: true,
+                credentials: 'include',
             });
             const { docs, totalPages } = response.data.data;
             setQuestions(docs);
